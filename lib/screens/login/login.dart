@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamelist/constans/font.dart';
 import '../home/home.dart';
-import 'widgets/buttonlogin.dart';
+import 'components/buttonlogin.dart';
 
 var formKey = GlobalKey<FormState>();
 var userNameController = TextEditingController();
@@ -9,7 +9,7 @@ var passwordController = TextEditingController();
 const ENTERED = 1;
 const UNENTERED = 2;
 
-var statusOfClickLogin = 2;
+var statusOfClickLogin = UNENTERED;
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -111,6 +111,7 @@ Widget buildCenterWidget(
               return "${hint} không được để trống";
             } else {
               if (type == PASSWORLD && statusOfClickLogin == ENTERED) {
+                statusOfClickLogin = UNENTERED;
                 return "Sai tài khoản hoặc mật khẩu";
               }
               return null;

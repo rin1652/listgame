@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gamelist/constans/font.dart';
-import 'package:gamelist/screens/home/widgets/appbar.dart';
-import 'package:gamelist/screens/home/widgets/newest_game.dart';
+import 'package:gamelist/screens/home/components/appbar.dart';
+import 'package:gamelist/screens/home/components/newest_game.dart';
 
 class homepage extends StatefulWidget {
   const homepage({super.key});

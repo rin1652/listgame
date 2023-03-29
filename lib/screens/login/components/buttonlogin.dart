@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../constans/font.dart';
 import '../../home/home.dart';
 import '../login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class btnLogin extends StatelessWidget {
   final String text; // khai báo biến text là một tham số của class
@@ -23,11 +24,16 @@ class btnLogin extends StatelessWidget {
             backgroundColor: Color(0xFFFFC000),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0))),
-        onPressed: () {
-          if (formKey.currentState!.validate()) {
-            if (userNameController.text.compareTo("ab") == 0 &&
-                passwordController.text.compareTo('1') == 0) {
+        onPressed: () async {
+          // if (formKey.currentState!.validate()) {
+          if (true) {
+            if (userNameController.text.compareTo("a") == 0 &&
+                passwordController.text.compareTo("a") == 0) {
               String userName = userNameController.text;
+              var sharedPreferences = await SharedPreferences.getInstance();
+              sharedPreferences.setString('username', userNameController.text);
+              sharedPreferences.setString('password', passwordController.text);
+
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => homepage()),
@@ -37,7 +43,7 @@ class btnLogin extends StatelessWidget {
               statusOfClickLogin = ENTERED;
             }
           } else {
-            print("Dữ liệu không hợp lệ");
+            print(passwordController.text.toString());
             statusOfClickLogin = ENTERED;
           }
         },
