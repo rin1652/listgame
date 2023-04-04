@@ -7,6 +7,9 @@ const PAGE_LOGIN = 4;
 // trang hiện tại
 var current_page = PAGE_LOGIN;
 
+var scoreP1 = 0;
+var scoreP2 = 0;
+
 const DARKTHEME = 1;
 const LIGHTTHEME = 2;
 var _tcontrol;

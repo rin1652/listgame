@@ -7,20 +7,21 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../../constans/font.dart';
 
 // code game
-class tictacgamehomepage extends StatefulWidget {
-  const tictacgamehomepage({super.key});
+class TicTacGameHomePage extends StatefulWidget {
+  const TicTacGameHomePage({super.key});
 
   @override
-  State<tictacgamehomepage> createState() => _tictacgamehomepageState();
+  State<TicTacGameHomePage> createState() => _TicTacgameHomePageState();
 }
 
-class _tictacgamehomepageState extends State<tictacgamehomepage> {
+class _TicTacgameHomePageState extends State<TicTacGameHomePage> {
   String result = '';
   bool isPlayerOne = true;
   List<String> displayExOh = ['', '', '', '', '', '', '', '', ''];
 
   bool winer = false;
-  static const maxSeconds = 30;
+  // ignore: constant_identifier_names, unused_field
+  static const MAXSECON = 30;
   Timer? timer;
 
   bool finaler = false;
@@ -32,7 +33,7 @@ class _tictacgamehomepageState extends State<tictacgamehomepage> {
   int tap = 0;
 
   static var customFontWhite = GoogleFonts.coiny(
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
     color: Colors.white,
     letterSpacing: 3,
     fontSize: 28,
@@ -42,10 +43,11 @@ class _tictacgamehomepageState extends State<tictacgamehomepage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(image: backgroundImage, fit: BoxFit.cover)),
         child: Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: buildAppbar,
           body: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(children: [
@@ -59,44 +61,67 @@ class _tictacgamehomepageState extends State<tictacgamehomepage> {
     );
   }
 
+  get buildAppbar {
+    return AppBar(
+      shape: const ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(50),
+        bottomRight: Radius.circular(50),
+      )),
+      backgroundColor: BEECOLOR,
+      leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back_ios,
+          color: Colors.black,
+          size: 20,
+        ),
+        onPressed: () {
+          Navigator.of(context).pop(true);
+        },
+      ),
+      title: const Text(
+        'Zic tac toe',
+        style: lblTextAppbar,
+      ),
+    );
+  }
+
   Expanded socrePlayer() {
     return Expanded(
         flex: 1,
-        child: Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Player X',
-                    style: customFontWhite,
-                  ),
-                  Text(
-                    xScore.toString(),
-                    style: customFontWhite,
-                  ),
-                ],
-              ),
-              SizedBox(
-                width: 24,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    'Player O',
-                    style: customFontWhite,
-                  ),
-                  Text(
-                    oScore.toString(),
-                    style: customFontWhite,
-                  ),
-                ],
-              )
-            ],
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Player X',
+                  style: customFontWhite,
+                ),
+                Text(
+                  xScore.toString(),
+                  style: customFontWhite,
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 24,
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Player O',
+                  style: customFontWhite,
+                ),
+                Text(
+                  oScore.toString(),
+                  style: customFontWhite,
+                ),
+              ],
+            )
+          ],
         ));
   }
 
@@ -109,7 +134,7 @@ class _tictacgamehomepageState extends State<tictacgamehomepage> {
               result,
               style: customFontWhite,
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             finaler
@@ -117,16 +142,16 @@ class _tictacgamehomepageState extends State<tictacgamehomepage> {
                     onPressed: () {
                       _resetGame();
                     },
-                    child: Text(
+                    style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 32, vertical: 16),
+                        backgroundColor: const Color(0xFFFFC000),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0))),
+                    child: const Text(
                       'Reset',
                       style: fontButon,
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 32, vertical: 16),
-                        backgroundColor: Color(0xFFFFC000),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0))))
+                    ))
                 : Container(),
           ],
         ));
@@ -138,7 +163,7 @@ class _tictacgamehomepageState extends State<tictacgamehomepage> {
       child: GridView.builder(
         itemCount: 9,
         gridDelegate:
-            SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {

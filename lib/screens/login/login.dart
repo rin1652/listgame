@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gamelist/constans/font.dart';
-import '../home/home.dart';
 import 'components/buttonlogin.dart';
+import 'package:gamelist/screens/splash/splash_screen.dart';
 
 var formKey = GlobalKey<FormState>();
 var userNameController = TextEditingController();
 var passwordController = TextEditingController();
+// ignore: constant_identifier_names
 const ENTERED = 1;
+// ignore: constant_identifier_names
 const UNENTERED = 2;
 
 var statusOfClickLogin = UNENTERED;
+final accountProviders =
+    StateNotifierProvider<AccountProvider, String>((ref) => AccountProvider());
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+class LoginPage extends ConsumerWidget {
+  const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return SafeArea(
       bottom: true,
       child: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(image: backgroundImage, fit: BoxFit.cover)),
         child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -28,31 +33,31 @@ class LoginPage extends StatelessWidget {
                     key: formKey,
                     child: Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
-                        Image(image: logoBeeText),
+                        const Image(image: logoBeeText),
                         buildCenterWidget(
                             userNameController, 'User name', USER_NAME),
                         buildCenterWidget(
                             passwordController, 'Password', PASSWORLD),
-                        homepagelink(),
-                        SizedBox(height: 36.0),
-                        btnLogin(
+                        const Homepagelink(),
+                        const SizedBox(height: 36.0),
+                        const BtnLogin(
                           text: 'ENTRAR',
                         ),
-                        SizedBox(height: 36.0),
-                        TxtOther('Anda não sou cadastrario'),
+                        const SizedBox(height: 36.0),
+                        txtOther('Anda não sou cadastrario'),
                       ],
                     ))),
             bottomNavigationBar:
-                Container(child: TxtOther('Termos de uso e privacidade'))),
+                Container(child: txtOther('Termos de uso e privacidade'))),
       ),
     );
   }
 }
 
-Widget TxtOther(String text) {
+Widget txtOther(String text) {
   return Text(
     text,
     style: lblText,
@@ -60,14 +65,14 @@ Widget TxtOther(String text) {
   );
 }
 
-class homepagelink extends StatelessWidget {
-  const homepagelink({
+class Homepagelink extends StatelessWidget {
+  const Homepagelink({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Text(
+    return const Text(
       'Esquueci minha senga',
       style: TextStyle(
           decoration: TextDecoration.underline,
@@ -83,9 +88,9 @@ Widget buildCenterWidget(
     TextEditingController controller, String hint, int type) {
   return Center(
     child: Padding(
-      padding: EdgeInsets.symmetric(vertical: 7.0),
+      padding: const EdgeInsets.symmetric(vertical: 7.0),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: const EdgeInsets.symmetric(horizontal: 30.0),
         child: TextFormField(
           obscureText: type == PASSWORLD ? true : false,
           controller: controller,
@@ -96,7 +101,7 @@ Widget buildCenterWidget(
               borderRadius: BorderRadius.circular(15.0),
             ),
             contentPadding:
-                EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
+                const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15.0),
             // label: Text('Tên đăng nhập'),
             hintText: hint,
             hintStyle: TextStyle(color: Colors.grey[700]),
@@ -108,7 +113,7 @@ Widget buildCenterWidget(
           ),
           validator: (str) {
             if (str == null || str.isEmpty) {
-              return "${hint} không được để trống";
+              return "$hint không được để trống";
             } else {
               if (type == PASSWORLD && statusOfClickLogin == ENTERED) {
                 statusOfClickLogin = UNENTERED;

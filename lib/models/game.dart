@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class Game {
   String bgImg;
   String icon;
@@ -11,18 +9,9 @@ class Game {
   String desc;
   List<String> ims;
   num gameNumber;
-  Game(
-    this.bgImg,
-    this.icon,
-    this.name,
-    this.type,
-    this.score,
-    this.play,
-    this.review,
-    this.desc,
-    this.ims,
-    this.gameNumber,
-  );
+  bool install;
+  Game(this.bgImg, this.icon, this.name, this.type, this.score, this.play,
+      this.review, this.desc, this.ims, this.gameNumber, this.install);
   static List<Game> generateGames() {
     return [
       Game(
@@ -42,6 +31,7 @@ class Game {
           'assets/images/game1.png',
         ],
         1,
+        true,
       ),
       Game(
         'assets/images/game2.png',
@@ -60,6 +50,7 @@ class Game {
           'assets/images/game2.png',
         ],
         2,
+        false,
       ),
       Game(
         'assets/images/game5.png',
@@ -78,6 +69,7 @@ class Game {
           'assets/images/game5.png',
         ],
         3,
+        false,
       ),
       Game(
         'assets/images/game3.png',
@@ -96,6 +88,7 @@ class Game {
           'assets/images/game3.png',
         ],
         4,
+        false,
       ),
       Game(
         'assets/images/game4.png',
@@ -114,6 +107,7 @@ class Game {
           'assets/images/game4.png',
         ],
         5,
+        false,
       ),
     ];
   }

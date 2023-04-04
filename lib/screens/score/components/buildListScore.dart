@@ -1,12 +1,11 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:gamelist/constans/font.dart';
 import 'package:gamelist/models/game.dart';
 
-import '../../games/tictacgame/tictacgamehome.dart';
-
-class NewestGame extends StatelessWidget {
+class Scorelist extends StatelessWidget {
   final List<Game> listGames = Game.generateGames();
-  NewestGame({super.key});
+  Scorelist({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +86,27 @@ class NewestGame extends StatelessWidget {
                       ),
                       Expanded(
                         flex: 3,
-                        child: BtnPlay(gameClick: e),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Text(
+                              "P1: ",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text(
+                              "P2: ",
+                              style: TextStyle(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -113,71 +132,6 @@ class NewestGame extends StatelessWidget {
                 size: 16,
               ))
           .toList(),
-    );
-  }
-}
-
-class BtnPlay extends StatelessWidget {
-  final Game gameClick;
-
-  const BtnPlay({Key? key, required this.gameClick}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 32,
-      padding: const EdgeInsets.only(right: 10.0),
-      child: ElevatedButton(
-        onPressed: () {
-          if (gameClick.gameNumber == 1) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const TicTacGameHomePage()),
-            );
-          } else {
-            // dialogGame(context);
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                backgroundColor: Colors.grey[700],
-                content: const Text("Game chưa phát hành")));
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: BEECOLOR,
-          foregroundColor: Colors.white,
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-        ),
-        child: const Text(
-          'Play',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
-
-  AlertDialog dialogGame(BuildContext context) {
-    return AlertDialog(
-      title: const Text('Rất tiếc'),
-      content: SingleChildScrollView(
-        child: ListBody(
-          children: const <Widget>[
-            Text('Game này chưa phát hành'),
-          ],
-        ),
-      ),
-      actions: <Widget>[
-        TextButton(
-          child: const Text('OK'),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ],
     );
   }
 }

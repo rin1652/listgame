@@ -3,20 +3,22 @@ import 'package:gamelist/constans/font.dart';
 import 'package:gamelist/screens/home/components/appbar.dart';
 import 'package:gamelist/screens/home/components/newest_game.dart';
 
-class homepage extends StatefulWidget {
-  const homepage({super.key});
+import '../score/scorescreen.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<homepage> createState() => _homepageState();
+  State<HomePage> createState() => _HomePaState();
 }
 
+// screen status
+// ignore: prefer_typing_uninitialized_variables
 var _tcontrol;
 
-class _homepageState extends State<homepage>
-    with SingleTickerProviderStateMixin {
+class _HomePaState extends State<HomePage> with SingleTickerProviderStateMixin {
   @override
   void initState() {
-    // TODO: implement initState
     _tcontrol = TabController(length: 3, vsync: this);
     super.initState();
   }
@@ -32,44 +34,35 @@ class _homepageState extends State<homepage>
         child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: buildAppBar(),
-            body: MainView(),
-            bottomNavigationBar: BotTabBar()),
+            body: const MainView(),
+            bottomNavigationBar: const BotTabBar()),
       ),
     );
   }
 }
 
-class TopBar extends StatelessWidget {
-  const TopBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
-
-class homeview extends StatelessWidget {
-  const homeview({super.key});
+class HomeView extends StatelessWidget {
+  const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          search(),
+        children: const [
+          Search(),
           SizedBox(
             height: 20,
           ),
-          seeall(),
+          Seeall(),
         ],
       ),
     );
   }
 }
 
-class seeall extends StatelessWidget {
-  const seeall({super.key});
+class Seeall extends StatelessWidget {
+  const Seeall({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -77,17 +70,17 @@ class seeall extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey[700],
           // color: Color(0xFFF6F8FF),
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           )),
       child: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 0,
             width: 1000,
           ),
-          _buildTitle('List game'),
+          const BuildTitle('List game'),
           NewestGame(),
         ],
       ),
@@ -95,28 +88,35 @@ class seeall extends StatelessWidget {
   }
 }
 
-Widget _buildTitle(String text) {
-  return Container(
-    padding: EdgeInsets.symmetric(horizontal: 25),
-    width: double.maxFinite,
-    child: Text(
-      text,
-      style: TextStyle(
-          color: Colors.white,
-          fontSize: 20.0,
-          fontWeight: FontWeight.w500,
-          height: 1.8),
-    ),
-  );
-}
-
-class search extends StatelessWidget {
-  const search({super.key});
+// sao không dùng chung các hàm được mặc dù đã import thư viện? có lẽ vì khác folder mẹ
+class BuildTitle extends StatelessWidget {
+  final String text;
+  const BuildTitle(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(horizontal: 25),
+      width: double.maxFinite,
+      child: Text(
+        text,
+        style: const TextStyle(
+            color: Colors.white,
+            fontSize: 20.0,
+            fontWeight: FontWeight.w500,
+            height: 1.8),
+      ),
+    );
+  }
+}
+
+class Search extends StatelessWidget {
+  const Search({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        padding: const EdgeInsets.symmetric(
           horizontal: 20,
           vertical: 20,
         ),
@@ -124,45 +124,46 @@ class search extends StatelessWidget {
           TextField(
             cursorColor: BEECOLOR,
             decoration: InputDecoration(
-                fillColor: Color(0xFFF6F8FF),
+                fillColor: const Color(0xFFF6F8FF),
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(
+                  borderSide: const BorderSide(
                     width: 0,
                     style: BorderStyle.none,
                   ),
                 ),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 0,
                 ),
-                prefixIcon: Icon(
+                prefixIcon: const Icon(
                   Icons.search_outlined,
                   color: BEECOLOR,
                   size: 30,
                 ),
                 hintText: 'Search game',
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                   color: Color(0xFFB0B0B0),
                   fontSize: 14,
                 )),
           ),
           Positioned(
-              bottom: 6,
-              right: 12,
-              child: Container(
-                padding: EdgeInsets.all(5),
-                child: Icon(
-                  Icons.mic_outlined,
-                  color: Colors.white,
-                  size: 25,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: BEECOLOR,
-                ),
-              ))
+            bottom: 6,
+            right: 12,
+            child: Container(
+              padding: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: BEECOLOR,
+              ),
+              child: const Icon(
+                Icons.mic_outlined,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
+          )
         ]));
   }
 }
@@ -180,8 +181,8 @@ class _MainViewState extends State<MainView>
   Widget build(BuildContext context) {
     return TabBarView(
       controller: _tcontrol,
-      children: [
-        homeview(),
+      children: const [
+        HomeView(),
         Center(
           child: Text(
             'Welcome settings',
@@ -189,10 +190,7 @@ class _MainViewState extends State<MainView>
           ),
         ),
         Center(
-          child: Text(
-            'Welcome to score',
-            style: TextStyle(color: Colors.white),
-          ),
+          child: ScorePage(),
         ),
       ],
     );
@@ -214,15 +212,16 @@ class _BotTabBarState extends State<BotTabBar>
       color: _tcontrol.index == 0 ? Colors.grey[700] : Colors.black,
       child: Material(
         elevation: 30.0,
-        shape: ContinuousRectangleBorder(
+        shape: const ContinuousRectangleBorder(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(50),
             topRight: Radius.circular(50),
           ),
         ),
-        color: TOPPICSTATUS == DARKTHEME ? Color(0xFF252836) : Colors.white,
+        color:
+            TOPPICSTATUS == DARKTHEME ? const Color(0xFF252836) : Colors.white,
         child: TabBar(
-            indicator: UnderlineTabIndicator(
+            indicator: const UnderlineTabIndicator(
               borderSide: BorderSide(width: 2.0, color: BEECOLOR),
               insets: EdgeInsets.symmetric(horizontal: 16.0),
             ),
@@ -230,16 +229,16 @@ class _BotTabBarState extends State<BotTabBar>
             tabs: [
               Tab(
                   icon: Icon(TOPPICSTATUS == DARKTHEME
-                      ? IconData(0xf48e, fontFamily: 'MaterialIcons')
-                      : IconData(0xf0280, fontFamily: 'MaterialIcons'))),
+                      ? const IconData(0xf48e, fontFamily: 'MaterialIcons')
+                      : const IconData(0xf0280, fontFamily: 'MaterialIcons'))),
               Tab(
                   icon: Icon(TOPPICSTATUS == DARKTHEME
-                      ? IconData(0xf363, fontFamily: 'MaterialIcons')
-                      : IconData(0xec76, fontFamily: 'MaterialIcons'))),
+                      ? const IconData(0xf363, fontFamily: 'MaterialIcons')
+                      : const IconData(0xec76, fontFamily: 'MaterialIcons'))),
               Tab(
                   icon: Icon(TOPPICSTATUS == DARKTHEME
-                      ? IconData(0xf33e, fontFamily: 'MaterialIcons')
-                      : IconData(0xf0130, fontFamily: 'MaterialIcons'))),
+                      ? const IconData(0xf33e, fontFamily: 'MaterialIcons')
+                      : const IconData(0xf0130, fontFamily: 'MaterialIcons'))),
             ]),
       ),
     );
