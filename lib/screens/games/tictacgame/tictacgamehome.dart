@@ -1,20 +1,26 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gamelist/screens/games/tictacgame/elements/colors.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constans/font.dart';
+import '../../splash/components/getData.dart';
+import '../../splash/splash_screen.dart';
+
+final scoreProviders =
+    StateNotifierProvider<ScoreProvider, int>((ref) => ScoreProvider());
 
 // code game
-class TicTacGameHomePage extends StatefulWidget {
+class TicTacGameHomePage extends ConsumerStatefulWidget {
   const TicTacGameHomePage({super.key});
 
   @override
-  State<TicTacGameHomePage> createState() => _TicTacgameHomePageState();
+  _TicTacgameHomePageState createState() => _TicTacgameHomePageState();
 }
 
-class _TicTacgameHomePageState extends State<TicTacGameHomePage> {
+class _TicTacgameHomePageState extends ConsumerState<TicTacGameHomePage> {
   String result = '';
   bool isPlayerOne = true;
   List<String> displayExOh = ['', '', '', '', '', '', '', '', ''];
@@ -25,9 +31,15 @@ class _TicTacgameHomePageState extends State<TicTacGameHomePage> {
   Timer? timer;
 
   bool finaler = false;
-
   int oScore = 0;
   int xScore = 0;
+  @override
+  void initState() {
+    super.initState();
+    xScore = scoreP1;
+    oScore = scoreP2;
+  }
+
   int filledBoxes = 0;
 
   int tap = 0;
@@ -295,6 +307,9 @@ class _TicTacgameHomePageState extends State<TicTacGameHomePage> {
     } else if (result == 'O') {
       oScore++;
     }
+    scoreP2 = oScore;
+    scoreP1 = xScore;
+    ref.read(scoreProviders.notifier).postScore();
   }
 
   void _resetGame() {

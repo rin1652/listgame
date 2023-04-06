@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:gamelist/models/game.dart';
+import '../../../constans/font.dart';
 
 class Scorelist extends StatelessWidget {
   final List<Game> listGames = Game.generateGames();
@@ -88,20 +89,20 @@ class Scorelist extends StatelessWidget {
                         flex: 3,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const <Widget>[
+                          children: <Widget>[
                             Text(
-                              "P1: ",
-                              style: TextStyle(
+                              "P1: $scoreP1",
+                              style: const TextStyle(
                                 color: Colors.red,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                             Text(
-                              "P2: ",
-                              style: TextStyle(
+                              "P2: $scoreP2",
+                              style: const TextStyle(
                                   color: Colors.blue,
                                   fontWeight: FontWeight.bold),
                             ),

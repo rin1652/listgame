@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gamelist/constans/font.dart';
+import '../splash/components/getData.dart';
 import 'components/buttonlogin.dart';
 import 'package:gamelist/screens/splash/splash_screen.dart';
 
