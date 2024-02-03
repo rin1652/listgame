@@ -8,24 +8,22 @@ import 'package:gamelist/screens/splash/splash_screen.dart';
 // import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
-  //splash screen
-  // WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-  //     // statusBarColor: Colors.transparent,
-  //     // statusBarIconBrightness: Brightness.dark,
-  //     ));
-
-  // await initialization(null);
-
   runApp(const ProviderScope(
-    child: MaterialApp(
-      debugShowCheckedModeBanner: true,
-      home: SplashScreen(),
-    ),
+    child: MyApp(),
   ));
 }
 
-// Future initialization(BuildContext? context) async {
-//   await Future.delayed(Duration(seconds: 3));
-// }
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(brightness: Brightness.light),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.light,
+      debugShowCheckedModeBanner: true,
+      home: const SplashScreen(),
+    );
+  }
+}

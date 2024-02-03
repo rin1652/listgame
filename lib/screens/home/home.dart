@@ -30,7 +30,9 @@ class _HomePaState extends State<HomePage> with SingleTickerProviderStateMixin {
       child: Container(
         decoration: BoxDecoration(
             // image: DecorationImage(image: backgroundImage, fit: BoxFit.cover)
-            color: TOPPICSTATUS == DARKTHEME ? Colors.black : Colors.white),
+            // color: TOPPICSTATUS == DARKTHEME ? Colors.black : Colors.white
+
+            ),
         child: Scaffold(
             backgroundColor: Colors.transparent,
             appBar: buildAppBar(),

@@ -37,3 +37,4 @@ const TextStyle lblTextAppbar = TextStyle(
     fontSize: 15.0,
     fontWeight: FontWeight.w500,
     height: 1.8);
+
